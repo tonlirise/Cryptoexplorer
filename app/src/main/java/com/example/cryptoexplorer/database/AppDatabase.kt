@@ -12,8 +12,7 @@ abstract class AppDatabase : RoomDatabase(){
         private const val DB_NAME = "main.db"
         private val LOCK = Any()
 
-        var db: AppDatabase? = null
-
+        private var db: AppDatabase? = null
         fun getInstance(context: Context): AppDatabase {
             synchronized(LOCK) {
                 db?.let { return it }
@@ -24,5 +23,5 @@ abstract class AppDatabase : RoomDatabase(){
             }
         }
     }
-    abstract fun getCoinPriceInfo() : CoinPriceInfoDao
+    abstract fun getCoinPriceInfoDao() : CoinPriceInfoDao
 }
