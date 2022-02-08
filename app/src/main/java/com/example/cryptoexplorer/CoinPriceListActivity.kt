@@ -27,11 +27,11 @@ class CoinPriceListActivity : AppCompatActivity() {
 
         val adapter = CoinInfoAdapter()
         binding.rvCoinInfo.adapter = adapter
-        adapter.coinClickListener = object : CoinInfoAdapter.CoinClickListener{
+        adapter.coinClickListener = object : CoinInfoAdapter.CoinClickListener {
             override fun onCoinClickListener(coinPriceInfo: CoinPriceInfo) {
-                Toast.makeText(applicationContext,
-                    coinPriceInfo.fromSymbol,
-                    Toast.LENGTH_LONG).show()
+                val intent =
+                    CoinInfoActivity.newIntent(this@CoinPriceListActivity, coinPriceInfo.fromSymbol)
+                startActivity(intent)
             }
         }
 
@@ -40,7 +40,7 @@ class CoinPriceListActivity : AppCompatActivity() {
             ViewModelProvider.AndroidViewModelFactory(application)
         )[CoinViewModel::class.java]
 
-        coinViewModel.coinInfoList.observe(this){
+        coinViewModel.coinInfoList.observe(this) {
             adapter.coinInfoList = it
         }
     }

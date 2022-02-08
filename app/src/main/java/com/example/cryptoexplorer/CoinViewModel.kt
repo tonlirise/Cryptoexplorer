@@ -45,7 +45,7 @@ class CoinViewModel(application: Application) : AndroidViewModel(application) {
         compositeDisposable.add(disposable)
     }
 
-    fun getPriceListFromRawData(coinPriceInfoRawData: CoinPriceInfoRawData): List<CoinPriceInfo> {
+    private fun getPriceListFromRawData(coinPriceInfoRawData: CoinPriceInfoRawData): List<CoinPriceInfo> {
         val result = arrayListOf<CoinPriceInfo>()
         val coinJsonObject = coinPriceInfoRawData.coinPriceInfoJsonObject ?: return result
         val setKeys = coinJsonObject.keySet()
