@@ -1,13 +1,13 @@
-package com.example.cryptoexplorer
+package com.example.cryptoexplorer.presentation
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.example.cryptoexplorer.api.ApiFactory
-import com.example.cryptoexplorer.database.AppDatabase
-import com.example.cryptoexplorer.pojo.CoinPriceInfo
-import com.example.cryptoexplorer.pojo.CoinPriceInfoRawData
+import com.example.cryptoexplorer.data.network.ApiFactory
+import com.example.cryptoexplorer.data.database.AppDatabase
+import com.example.cryptoexplorer.data.model.CoinPriceInfo
+import com.example.cryptoexplorer.data.model.CoinPriceInfoRawData
 import com.google.gson.Gson
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

@@ -1,8 +1,8 @@
-package com.example.cryptoexplorer.pojo
+package com.example.cryptoexplorer.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.cryptoexplorer.api.ApiFactory
+import com.example.cryptoexplorer.data.network.ApiFactory
 import com.example.cryptoexplorer.utils.convertTimestampToTime
 import com.google.gson.annotations.Expose
 

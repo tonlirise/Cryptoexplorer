@@ -1,11 +1,10 @@
-package com.example.cryptoexplorer.adapter
+package com.example.cryptoexplorer.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoexplorer.databinding.ItemCoinInfoBinding
-import com.example.cryptoexplorer.pojo.CoinInfo
-import com.example.cryptoexplorer.pojo.CoinPriceInfo
+import com.example.cryptoexplorer.data.model.CoinPriceInfo
 import com.squareup.picasso.Picasso
 
 class CoinInfoAdapter : RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {

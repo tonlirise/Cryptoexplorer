@@ -1,14 +1,12 @@
-package com.example.cryptoexplorer
+package com.example.cryptoexplorer.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.cryptoexplorer.adapter.CoinInfoAdapter
+import com.example.cryptoexplorer.presentation.adapter.CoinInfoAdapter
 import com.example.cryptoexplorer.databinding.ActivityCoinPriceListBinding
-import com.example.cryptoexplorer.pojo.CoinPriceInfo
+import com.example.cryptoexplorer.data.model.CoinPriceInfo
 
 
 class CoinPriceListActivity : AppCompatActivity() {

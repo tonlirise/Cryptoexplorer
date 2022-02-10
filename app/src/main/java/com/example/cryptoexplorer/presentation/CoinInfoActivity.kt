@@ -1,13 +1,11 @@
-package com.example.cryptoexplorer
+package com.example.cryptoexplorer.presentation
 
 import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.lifecycle.ViewModelProvider
 import com.example.cryptoexplorer.databinding.ActivityCoinInfoBinding
-import com.example.cryptoexplorer.pojo.CoinPriceInfo
 import com.squareup.picasso.Picasso
 import java.lang.RuntimeException
 
@@ -52,7 +50,7 @@ class CoinInfoActivity : AppCompatActivity() {
         private const val EXTRA_FSYM = "FSYM"
 
         fun newIntent(context: Context, fsym : String) : Intent{
-            val intent = Intent(context,CoinInfoActivity::class.java)
+            val intent = Intent(context, CoinInfoActivity::class.java)
             intent.putExtra(EXTRA_FSYM,fsym)
             return intent
         }
