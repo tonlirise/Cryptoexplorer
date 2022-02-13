@@ -2,18 +2,12 @@ package com.example.cryptoexplorer.presentation.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import com.example.cryptoexplorer.databinding.ItemCoinInfoBinding
 import com.example.cryptoexplorer.domain.entities.CoinInfoEntity
 import com.squareup.picasso.Picasso
 
-class CoinInfoAdapter : RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
-    var coinInfoList = listOf<CoinInfoEntity>()
-        set(value){
-            field = value
-            notifyDataSetChanged()
-        }
-
+class CoinInfoAdapter : ListAdapter<CoinInfoEntity, CoinInfoViewHolder>(CoinInfoDiffCallback()) {
     var coinClickListener : CoinClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinInfoViewHolder {
@@ -23,7 +17,7 @@ class CoinInfoAdapter : RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>
     }
 
     override fun onBindViewHolder(holder: CoinInfoViewHolder, position: Int) {
-        val coin = coinInfoList[position]
+        val coin = getItem(position)
         with(holder.binding){
             tvSymbols.text = "${coin.fromSymbol} / ${coin.toSymbol}"
             tvPrice.text = coin.price
@@ -34,11 +28,6 @@ class CoinInfoAdapter : RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>
             coinClickListener?.onCoinClickListener(coin)
         }
     }
-
-    override fun getItemCount() = coinInfoList.size
-
-    inner class CoinInfoViewHolder(val binding: ItemCoinInfoBinding) :
-        RecyclerView.ViewHolder(binding.root)
 
     interface CoinClickListener{
         fun onCoinClickListener (coinPriceInfo : CoinInfoEntity)
