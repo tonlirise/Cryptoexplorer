@@ -1,6 +1,12 @@
-package com.example.cryptoexplorer.domain.entities
+package com.example.cryptoexplorer.data.database
 
-data class CoinInfoEntity(
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+
+@Entity(tableName = "coin_info_price")
+data class CoinInfoDBModel(
+    @PrimaryKey
     val fromSymbol: String,
     val toSymbol: String?,
     val price: String?,

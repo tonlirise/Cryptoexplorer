@@ -1,24 +1,18 @@
-package com.example.cryptoexplorer.data.model
+package com.example.cryptoexplorer.data.network.model
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
 import com.example.cryptoexplorer.data.network.ApiFactory
 import com.example.cryptoexplorer.utils.convertTimestampToTime
 import com.google.gson.annotations.Expose
-
 import com.google.gson.annotations.SerializedName
 
 
-
-@Entity(tableName = "coin_info_price")
-data class CoinPriceInfo(
+data class CoinInfoDto(
     @SerializedName("TYPE")
     @Expose
     val type: String?,
     @SerializedName("MARKET")
     @Expose
     val market: String?,
-    @PrimaryKey
     @SerializedName("FROMSYMBOL")
     @Expose
     val fromSymbol: String,

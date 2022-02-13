@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.cryptoexplorer.presentation.adapter.CoinInfoAdapter
 import com.example.cryptoexplorer.databinding.ActivityCoinPriceListBinding
-import com.example.cryptoexplorer.data.model.CoinPriceInfo
+import com.example.cryptoexplorer.domain.entities.CoinInfoEntity
+import com.example.cryptoexplorer.presentation.adapter.CoinInfoAdapter
 
 
 class CoinPriceListActivity : AppCompatActivity() {
@@ -26,7 +26,7 @@ class CoinPriceListActivity : AppCompatActivity() {
         val adapter = CoinInfoAdapter()
         binding.rvCoinInfo.adapter = adapter
         adapter.coinClickListener = object : CoinInfoAdapter.CoinClickListener {
-            override fun onCoinClickListener(coinPriceInfo: CoinPriceInfo) {
+            override fun onCoinClickListener(coinPriceInfo: CoinInfoEntity) {
                 val intent =
                     CoinInfoActivity.newIntent(this@CoinPriceListActivity, coinPriceInfo.fromSymbol)
                 startActivity(intent)
