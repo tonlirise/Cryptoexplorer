@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.cryptoexplorer.databinding.ItemCoinInfoBinding
 import com.example.cryptoexplorer.domain.entities.CoinInfoEntity
-import com.example.cryptoexplorer.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 
 class CoinInfoAdapter : RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
@@ -28,7 +27,7 @@ class CoinInfoAdapter : RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>
         with(holder.binding){
             tvSymbols.text = "${coin.fromSymbol} / ${coin.toSymbol}"
             tvPrice.text = coin.price
-            tvLastUpdate.text = convertTimestampToTime(coin.lastUpdate)
+            tvLastUpdate.text = coin.lastUpdate
             Picasso.get().load(coin.imageUrl).into(ivLogoCoin)
         }
         holder.itemView.setOnClickListener{
