@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import com.example.cryptoexplorer.R
 import com.example.cryptoexplorer.databinding.ActivityCoinPriceListBinding
 import com.example.cryptoexplorer.domain.entities.CoinInfoEntity
 import com.example.cryptoexplorer.presentation.adapter.CoinInfoAdapter
@@ -28,9 +29,12 @@ class CoinPriceListActivity : AppCompatActivity() {
         binding.rvCoinInfo.itemAnimator = null
         adapter.coinClickListener = object : CoinInfoAdapter.CoinClickListener {
             override fun onCoinClickListener(coinPriceInfo: CoinInfoEntity) {
-                val intent =
-                    CoinInfoActivity.newIntent(this@CoinPriceListActivity, coinPriceInfo.fromSymbol)
-                startActivity(intent)
+                if(isPortraitOrientation()){
+                    launchDetailActivity(coinPriceInfo.fromSymbol)
+                }
+                else{
+                    launchDetailFragment(coinPriceInfo.fromSymbol)
+                }
             }
         }
 
@@ -44,7 +48,19 @@ class CoinPriceListActivity : AppCompatActivity() {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
+    fun isPortraitOrientation() = binding.fragmentContainer == null
+
+    fun launchDetailActivity(fromSymbol : String){
+        val intent =
+            CoinInfoActivity.newIntent(this@CoinPriceListActivity, fromSymbol)
+        startActivity(intent)
+    }
+
+    fun launchDetailFragment(fromSymbol : String){
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.fragment_container, CoinInfoFragment.newInstance(fromSymbol))
+            .addToBackStack(null)
+            .commit()
     }
 }
