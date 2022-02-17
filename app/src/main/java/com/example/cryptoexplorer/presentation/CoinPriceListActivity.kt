@@ -8,6 +8,7 @@ import com.example.cryptoexplorer.R
 import com.example.cryptoexplorer.databinding.ActivityCoinPriceListBinding
 import com.example.cryptoexplorer.domain.entities.CoinInfoEntity
 import com.example.cryptoexplorer.presentation.adapter.CoinInfoAdapter
+import javax.inject.Inject
 
 
 class CoinPriceListActivity : AppCompatActivity() {
@@ -17,7 +18,16 @@ class CoinPriceListActivity : AppCompatActivity() {
 
     lateinit var coinViewModel: CoinViewModel
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val component by lazy {
+        (application as CoinApp).component
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.injection(this)
+
         super.onCreate(savedInstanceState)
         ActivityCoinPriceListBinding.inflate(LayoutInflater.from(this))
 
@@ -29,10 +39,9 @@ class CoinPriceListActivity : AppCompatActivity() {
         binding.rvCoinInfo.itemAnimator = null
         adapter.coinClickListener = object : CoinInfoAdapter.CoinClickListener {
             override fun onCoinClickListener(coinPriceInfo: CoinInfoEntity) {
-                if(isPortraitOrientation()){
+                if (isPortraitOrientation()) {
                     launchDetailActivity(coinPriceInfo.fromSymbol)
-                }
-                else{
+                } else {
                     launchDetailFragment(coinPriceInfo.fromSymbol)
                 }
             }
@@ -40,7 +49,7 @@ class CoinPriceListActivity : AppCompatActivity() {
 
         coinViewModel = ViewModelProvider(
             this,
-            ViewModelProvider.AndroidViewModelFactory(application)
+            viewModelFactory
         )[CoinViewModel::class.java]
 
         coinViewModel.coinInfoList.observe(this) {
@@ -50,13 +59,13 @@ class CoinPriceListActivity : AppCompatActivity() {
 
     fun isPortraitOrientation() = binding.fragmentContainer == null
 
-    fun launchDetailActivity(fromSymbol : String){
+    fun launchDetailActivity(fromSymbol: String) {
         val intent =
             CoinInfoActivity.newIntent(this@CoinPriceListActivity, fromSymbol)
         startActivity(intent)
     }
 
-    fun launchDetailFragment(fromSymbol : String){
+    fun launchDetailFragment(fromSymbol: String) {
         supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, CoinInfoFragment.newInstance(fromSymbol))

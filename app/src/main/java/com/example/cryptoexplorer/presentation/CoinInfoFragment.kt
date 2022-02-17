@@ -1,5 +1,6 @@
 package com.example.cryptoexplorer.presentation
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,13 +9,26 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.cryptoexplorer.databinding.FragmentCoinInfoBinding
 import com.squareup.picasso.Picasso
+import javax.inject.Inject
 
 class CoinInfoFragment : Fragment() {
     lateinit var viewModel: CoinViewModel
 
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
     private var _banding: FragmentCoinInfoBinding? = null
     val binding: FragmentCoinInfoBinding
         get() = _banding ?: throw RuntimeException("FragmentCoinInfoBinding is null")
+
+    private val component by lazy {
+        (requireActivity().application as CoinApp).component
+    }
+
+    override fun onAttach(context: Context) {
+        component.injection(this)
+        super.onAttach(context)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +44,7 @@ class CoinInfoFragment : Fragment() {
 
         viewModel = ViewModelProvider(
             this,
-            ViewModelProvider.AndroidViewModelFactory(requireActivity().application)
+            viewModelFactory
         )[CoinViewModel::class.java]
 
         viewModel.getPriceInfoAboutCoin(getFSym()).observe(viewLifecycleOwner) {
